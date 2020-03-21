@@ -11,7 +11,7 @@
 
 <style>
     p {
-        max-width: 500px;
+        max-width: 800px;
         padding: 0 10px;
     }
 </style>

@@ -10,7 +10,6 @@
 
 <style>
     p {
-        max-width: 500px;
         padding: 0 10px;
     }
 </style>

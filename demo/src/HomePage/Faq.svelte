@@ -54,12 +54,12 @@
 
 <style>
     p {
-        max-width: 500px;
+        max-width: 800px;
         padding: 0 10px;
     }
 
     h3 {
-        max-width: 500px;
+        max-width: 800px;
         margin: 0 auto;
         padding: 0 10px;
         color: #ee811c;
