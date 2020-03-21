@@ -1,5 +1,5 @@
 // This file is injected into the headless chrome window context during the prerender phase.
-// https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/demo/prerender.config.js#L21-L23
+// https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/demo/prerender.config.js#L23-L25
 
 const mountedNodes = {};
 const nodeProps = {};
