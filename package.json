@@ -1,0 +1,13 @@
+{
+  "name": "svelte-partial-hydrating-prerenderer",
+  "description": "A proof of concept partial hydrating prerenderer",
+  "version": "0.1.0",
+  "author": "Jake Deichert",
+  "repository": "github:jakedeichert/svelte-partial-hydrating-prerenderer",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier '**/*.{js,ts,css,html,json,yml}' --write --ignore-path .gitignore",
+    "format:check": "prettier '**/*.{js,ts,css,html,json,yml}' --list-different --ignore-path .gitignore",
+    "lint": "eslint . --ignore-path .gitignore"
+  }
+}
