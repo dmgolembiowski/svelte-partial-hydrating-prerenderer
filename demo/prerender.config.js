@@ -17,6 +17,7 @@ module.exports = {
     url: 'http://localhost:8080',
     // Where to save the files to
     output: 'public/dist',
+    // Plugins to run during prerender
     plugins,
     async onPageInit(page) {
         await injectSvelteHydrationMarkerLogic(page);

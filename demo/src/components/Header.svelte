@@ -7,7 +7,7 @@
             <a href="#rsvp">RSVP</a>
         </span>
         <span>
-            <a href="#accomodations">Accomodations</a>
+            <a href="#accommodations">Accommodations</a>
         </span>
         <span>
             <a href="#registry">Registry</a>
