@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "svelvet",
-    "build": "NODE_ENV=production svelvet"
+    "dev": "svelvet --hydratable",
+    "build": "NODE_ENV=production svelvet --hydratable"
   },
   "dependencies": {
     "svelte": "^3.20.1"
