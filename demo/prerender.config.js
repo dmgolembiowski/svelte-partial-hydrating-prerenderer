@@ -31,7 +31,7 @@ module.exports = {
 
 async function injectSvelteHydrationMarkerLogic(page) {
     const script =
-        './node_modules/svelte-partial-hydrating-prerenderer/lib/mark-hydratable-component.js';
+        './node_modules/svelte-partial-hydrating-prerenderer/plugins/mark-hydratable-component.js';
     const source = await fs.readFile(script, 'utf8');
     await page.evaluateOnNewDocument(source);
 }
