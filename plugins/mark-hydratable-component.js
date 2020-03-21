@@ -1,3 +1,5 @@
+// This file is injected into the headless chrome window context during the prerender phase.
+
 const mountedNodes = {};
 const nodeProps = {};
 const scriptNodes = {};

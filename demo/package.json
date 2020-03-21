@@ -2,6 +2,10 @@
   "name": "svelte-partial-hydrating-prerenderer-demo",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "dev": "svelvet",
+    "build": "NODE_ENV=production svelvet"
+  },
   "dependencies": {
     "svelte": "^3.20.1"
   },
