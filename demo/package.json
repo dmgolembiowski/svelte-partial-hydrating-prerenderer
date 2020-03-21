@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "svelvet --hydratable",
-    "build": "NODE_ENV=production svelvet --hydratable"
+    "build": "NODE_ENV=production svelvet --hydratable",
+    "serve": "servor ./public",
+    "serve:prerendered": "servor ./prerendered",
+    "prerender": "npm run build && rm -rf prerendered && cp -R public prerendered && ./node_modules/svelte-partial-hydrating-prerenderer/bin/index.js"
   },
   "dependencies": {
     "svelte": "^3.20.1"

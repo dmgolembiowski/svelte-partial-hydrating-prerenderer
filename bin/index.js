@@ -9,15 +9,19 @@ const prerenderConfig = require(path.join(
     'prerender.config.js'
 ));
 
+const PORT = prerenderConfig.port || 8080;
+
 (async () => {
     // Serve so that headless chrome can load and render it
     await servor({
-        root: './public',
+        root: prerenderConfig.serve,
         fallback: 'index.html',
-        port: 8080,
+        port: PORT,
+        reload: false,
     });
-    console.info(`Server started`);
+    console.info(`Server running`);
 
+    console.info(`Starting prerender phase...`);
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     // page.setViewport({ width: 1920, height: 1080 });
@@ -32,7 +36,7 @@ const prerenderConfig = require(path.join(
 
     // Grab content of every page
     for (const p of prerenderConfig.pages) {
-        const url = `${prerenderConfig.url}${p.path}`;
+        const url = `http://localhost:${PORT}${p.path}`;
         await page.goto(url);
 
         // Run page plugins
@@ -54,6 +58,8 @@ const prerenderConfig = require(path.join(
     );
 
     await browser.close();
+    console.log(`Prerender complete`);
+    process.exit(0);
 })();
 
 async function makeDir(outputPath) {

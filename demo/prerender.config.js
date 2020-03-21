@@ -13,10 +13,11 @@ const plugins = [
 ];
 
 module.exports = {
-    // The website url to load
-    url: 'http://localhost:8080',
-    // Where to save the files to
-    output: 'public/dist',
+    // Which directory to serve.
+    // npm run prerender copies `./public` to `./prerendered` before starting.
+    serve: 'prerendered',
+    // Where to save the files to (overwrites html files)
+    output: 'prerendered',
     // Plugins to run during prerender
     plugins,
     async onPageInit(page) {
