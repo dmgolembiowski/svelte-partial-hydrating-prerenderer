@@ -2,9 +2,22 @@
 const fs = require('fs').promises;
 const path = require('path');
 const puppeteer = require('puppeteer');
-const config = require(`../prerender.config.js`);
+const servor = require('servor');
+
+const prerenderConfig = require(path.join(
+    process.cwd(),
+    'prerender.config.js'
+));
 
 (async () => {
+    // Serve so that headless chrome can load and render it
+    await servor({
+        root: './public',
+        fallback: 'index.html',
+        port: 8080,
+    });
+    console.info(`Server started`);
+
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     // page.setViewport({ width: 1920, height: 1080 });
@@ -15,16 +28,16 @@ const config = require(`../prerender.config.js`);
     });
 
     // Run custom page init logic
-    config.onPageInit && (await config.onPageInit(page));
+    prerenderConfig.onPageInit && (await prerenderConfig.onPageInit(page));
 
     // Grab content of every page
-    for (const p of config.pages) {
-        const url = `${config.url}${p.path}`;
+    for (const p of prerenderConfig.pages) {
+        const url = `${prerenderConfig.url}${p.path}`;
         await page.goto(url);
 
         // Run page plugins
-        if (config.plugins) {
-            await runPlugins(page, config.plugins);
+        if (prerenderConfig.plugins) {
+            await runPlugins(page, prerenderConfig.plugins);
         }
 
         p.content = await page.content();
@@ -32,9 +45,9 @@ const config = require(`../prerender.config.js`);
 
     // Save each page
     await Promise.all(
-        config.pages.map(async p => {
+        prerenderConfig.pages.map(async p => {
             const fileName = p.output || path.join(p.path, 'index.html');
-            const outputPath = path.join(config.output, fileName);
+            const outputPath = path.join(prerenderConfig.output, fileName);
             await makeDir(outputPath);
             return fs.writeFile(outputPath, p.content);
         })
