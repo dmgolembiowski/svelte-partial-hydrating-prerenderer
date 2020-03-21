@@ -3,7 +3,6 @@
   "description": "A proof of concept partial hydrating prerenderer",
   "version": "0.1.0",
   "author": "Jake Deichert",
-  "private": true,
   "repository": "github:jakedeichert/svelte-partial-hydrating-prerenderer",
   "license": "MIT",
   "bin": "./bin/index.js",
