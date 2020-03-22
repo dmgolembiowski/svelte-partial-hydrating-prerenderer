@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "svelte-partial-hydrating-prerenderer": "./svelte-partial-hydrating-prerenderer.js",
+    "svelte/internal": "./svelte/internal.js"
+  }
+}

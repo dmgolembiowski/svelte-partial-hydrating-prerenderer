@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Svelte Partial Hydration Prerender Demo</title>
+
+    <style>
+        * {
+            border: 0;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #fff;
+            color: #606f7b;
+            font-size: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+                'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.4;
+            /* Prevents mobile browsers from adjusting text size randomly... */
+            text-size-adjust: 100%;
+        }
+
+        p {
+            margin: 0 auto 1.5em;
+            line-height: 1.5;
+        }
+
+        a {
+            color: rgb(243, 15, 53);
+            text-decoration: none;
+        }
+
+        a:hover,
+        a:focus {
+            outline: none;
+            text-decoration: none;
+            border-bottom: 2px solid rgb(243, 15, 53);
+        }
+    </style>
+<style id="svelte-bepxyp-style">.header.svelte-bepxyp.svelte-bepxyp{padding:2em 1em 0;margin:0 auto 3em;text-align:center}nav.svelte-bepxyp span.svelte-bepxyp{font-size:20px}nav.svelte-bepxyp span.svelte-bepxyp:not(:last-child)::after{content:' × ';color:#b4bdc8;padding:0 0.2em;font-weight:400;position:relative}a.svelte-bepxyp.svelte-bepxyp{color:rgb(53, 62, 72)}h1.svelte-bepxyp.svelte-bepxyp{font-size:50px;font-weight:bold;line-height:1;margin:0 0 30px}@media(max-width: 500px){h1.svelte-bepxyp.svelte-bepxyp{font-size:38px}}</style><style id="svelte-pvoym4-style">main.svelte-pvoym4{margin:0 auto}hr.svelte-pvoym4{border-bottom:1px solid #b4bdc8;display:block;height:0;margin:35px auto 30px;width:10em}h2.svelte-pvoym4{font-weight:bold;font-size:30px;margin:0 auto 15px;text-align:center}</style><style id="svelte-xcz2d8-style">form.svelte-xcz2d8{margin:2em auto;max-width:500px}.spacer.svelte-xcz2d8{min-height:20px}.info.svelte-xcz2d8{font-weight:bold;text-align:center;color:#ee811c;padding:10px 0 0 0}.buttons.svelte-xcz2d8{display:flex;justify-content:center}</style><style id="svelte-z9hrvf-style">.guest.svelte-z9hrvf.svelte-z9hrvf{border:1px solid #e8e8e8;border-radius:10px;margin:0 10px}.groupLabel.svelte-z9hrvf.svelte-z9hrvf{margin:0 0 10px;font-weight:bold;color:#ee811c}.form.svelte-z9hrvf.svelte-z9hrvf{padding:12px 20px}.guestNumber.svelte-z9hrvf.svelte-z9hrvf{font-size:20px;padding:10px 14px;margin:0;border-bottom:1px solid #e8e8e8;display:flex;justify-content:space-between;align-items:center}.guestNumber.svelte-z9hrvf>button.svelte-z9hrvf{font-size:14px;background-color:transparent;color:#aaaaaa;cursor:pointer;font-weight:bold;text-align:center;vertical-align:middle;flex-shrink:0}.guestNumber.svelte-z9hrvf>button.svelte-z9hrvf:hover{color:#b92525}.radioGroup.svelte-z9hrvf.svelte-z9hrvf{display:flex;margin:0 0 12px}.radioGroup.svelte-z9hrvf.svelte-z9hrvf>:first-child{padding:0 20px 0 0}.nameAndCheckbox.svelte-z9hrvf.svelte-z9hrvf{display:flex;align-items:center;margin:0 0 12px}.nameAndCheckbox>div.svelte-z9hrvf.svelte-z9hrvf{min-width:72px;display:flex;justify-content:flex-end;padding:28px 0 0 0}</style><style id="svelte-v5ktm5-style">label.svelte-v5ktm5{display:block}input.svelte-v5ktm5{margin:0 5px 0 0}</style><style id="svelte-szsw14-style">.wrapper.svelte-szsw14.svelte-szsw14{width:100%}.input.svelte-szsw14.svelte-szsw14{display:block;background-color:rgb(255, 255, 255);border:2px solid #ccc;border-radius:4px;color:#606f7b;font-size:16px;line-height:20px;padding:8px 12px;width:100%;min-width:100%;max-width:100%;-webkit-appearance:none;appearance:none}.input.svelte-szsw14.svelte-szsw14:focus{outline:0;background-color:#fff}.invalid.svelte-szsw14 .input.svelte-szsw14,.invalid.svelte-szsw14 .input.svelte-szsw14:focus{border-color:rgb(255, 140, 140)}.label.svelte-szsw14.svelte-szsw14{margin:0 0 10px;font-weight:bold;color:#ee811c}</style><style id="svelte-16jcgni-style">.plain.svelte-16jcgni{background-color:transparent;color:#67a8c1;cursor:pointer;font-size:18px;font-weight:bold;margin:0 10px;padding:10px;display:inline-block;text-align:center;vertical-align:middle;flex-shrink:0}.plain.svelte-16jcgni:hover{color:#4f8499}.filled.svelte-16jcgni{background:#67a8c1;border-radius:100px;padding:10px 18px;color:#fff;min-width:100px}.filled.svelte-16jcgni:hover{color:#fff;background:#4f8499}.filled.danger.svelte-16jcgni{background:#dd4747}.filled.danger.svelte-16jcgni:hover{background:#b92525}.primary.svelte-16jcgni{background:#61c689}.primary.svelte-16jcgni:hover{background:#3e9d63}.loading.svelte-16jcgni{padding:2px 0}.disabled.svelte-16jcgni{background:#8f8f8f;cursor:not-allowed}.disabled.svelte-16jcgni:hover{background:#8f8f8f}.cancel.svelte-16jcgni{color:#606f7b}@media(max-width: 550px){.plain.svelte-16jcgni{font-size:15px}}</style><style id="svelte-jpuvt2-style">p.svelte-jpuvt2{max-width:800px;padding:0 10px}</style><style id="svelte-1ilpytg-style">p.svelte-1ilpytg{padding:0 10px}</style><style id="svelte-1r3bnez-style">form.svelte-1r3bnez{margin:2em auto;max-width:300px}.inputs.svelte-1r3bnez{margin:2em 0}.inputs.svelte-1r3bnez>div{margin:0 0 12px 0}.info.svelte-1r3bnez{font-weight:bold;text-align:center;color:#ee811c;padding:10px 0 0 0}.buttons.svelte-1r3bnez{display:flex;justify-content:center}</style><style id="svelte-7ba61m-style">p.svelte-7ba61m{max-width:800px;padding:0 10px}h3.svelte-7ba61m{max-width:800px;margin:0 auto;padding:0 10px;color:#ee811c}</style><style id="svelte-1k12vup-style">div.svelte-1k12vup{margin:3em auto 0;text-align:center;padding:0.75em 0}p.svelte-1k12vup{color:#97a4b2;margin:0}</style></head>
+
+<body>
+
+    <div id="app"><div class="header svelte-bepxyp"><h1 class="svelte-bepxyp"><a href="/" class="svelte-bepxyp">Svelte Demo</a></h1> <nav class="svelte-bepxyp"><span class="svelte-bepxyp"><a href="#rsvp" class="svelte-bepxyp">RSVP</a></span> <span class="svelte-bepxyp"><a href="#accommodations" class="svelte-bepxyp">Accommodations</a></span> <span class="svelte-bepxyp"><a href="#registry" class="svelte-bepxyp">Registry</a></span> <span class="svelte-bepxyp"><a href="#request-a-song" class="svelte-bepxyp">Request a Song</a></span> <span class="svelte-bepxyp"><a href="#faq" class="svelte-bepxyp">FAQ</a></span></nav></div> <main class="svelte-pvoym4"><h2 id="rsvp" class="svelte-pvoym4">RSVP</h2> <div data-ssgref="0"><div><form novalidate="" class="svelte-xcz2d8"><div class="guest svelte-z9hrvf"><div class="guestNumber svelte-z9hrvf">Guest #1 <button type="button" class="svelte-z9hrvf">Remove</button></div> <div class="form svelte-z9hrvf"><div class="groupLabel svelte-z9hrvf">Will you be attending?</div> <div class="radioGroup svelte-z9hrvf"><label class="svelte-v5ktm5"><input type="radio" value="true" class="svelte-v5ktm5"> Yes</label> <label class="svelte-v5ktm5"><input type="radio" value="false" class="svelte-v5ktm5"> No</label></div> <div class="nameAndCheckbox svelte-z9hrvf"><div class="wrapper svelte-szsw14"><label><div class="label svelte-szsw14">Full Name</div> <input class="input svelte-szsw14" title="Full Name" placeholder=""></label></div></div> <div class="groupLabel svelte-z9hrvf">Are you going to book a hotel room?</div> <div class="radioGroup svelte-z9hrvf"><label class="svelte-v5ktm5"><input type="radio" value="true" class="svelte-v5ktm5"> Yes</label> <label class="svelte-v5ktm5"><input type="radio" value="false" class="svelte-v5ktm5"> No</label></div>  <div class="wrapper svelte-szsw14"><label><div class="label svelte-szsw14">Any Food Allergies?</div> <input class="input svelte-szsw14" title="Any Food Allergies?" placeholder=""></label></div></div></div> <div class="spacer svelte-xcz2d8"></div><div class="guest svelte-z9hrvf"><div class="guestNumber svelte-z9hrvf">Guest #2 <button type="button" class="svelte-z9hrvf">Remove</button></div> <div class="form svelte-z9hrvf"><div class="groupLabel svelte-z9hrvf">Will you be attending?</div> <div class="radioGroup svelte-z9hrvf"><label class="svelte-v5ktm5"><input type="radio" value="true" class="svelte-v5ktm5"> Yes</label> <label class="svelte-v5ktm5"><input type="radio" value="false" class="svelte-v5ktm5"> No</label></div> <div class="nameAndCheckbox svelte-z9hrvf"><div class="wrapper svelte-szsw14"><label><div class="label svelte-szsw14">Full Name</div> <input class="input svelte-szsw14" title="Full Name" placeholder=""></label></div></div> <div class="groupLabel svelte-z9hrvf">Are you going to book a hotel room?</div> <div class="radioGroup svelte-z9hrvf"><label class="svelte-v5ktm5"><input type="radio" value="true" class="svelte-v5ktm5"> Yes</label> <label class="svelte-v5ktm5"><input type="radio" value="false" class="svelte-v5ktm5"> No</label></div>  <div class="wrapper svelte-szsw14"><label><div class="label svelte-szsw14">Any Food Allergies?</div> <input class="input svelte-szsw14" title="Any Food Allergies?" placeholder=""></label></div></div></div> <div class="spacer svelte-xcz2d8"></div> <div class="buttons svelte-xcz2d8"><button type="submit" class="plain filled primary svelte-16jcgni">Submit</button> <button type="button" class="plain filled svelte-16jcgni">Add Guest</button></div></form></div></div> <hr class="svelte-pvoym4"> <h2 id="accommodations" class="svelte-pvoym4">Accommodations</h2> <p class="svelte-jpuvt2">Jelly beans icing lollipop candy canes carrot cake. Chupa chups sugar plum bonbon cake oat cake apple pie oat
+    cake fruitcake. Donut marzipan oat cake icing tootsie roll chocolate cake. Dragée lollipop halvah icing jelly
+    fruitcake marzipan macaroon. Sugar plum ice cream biscuit sugar plum macaroon sugar plum sesame snaps jelly
+    beans. Bonbon sugar plum cupcake. Sesame snaps dessert lemon drops cake. Sweet roll candy canes chocolate bar
+    pastry halvah. Cookie brownie chocolate cake marzipan. Lollipop cupcake jelly-o jelly carrot cake pastry
+    lollipop. Chupa chups wafer bear claw marshmallow. Jelly-o halvah toffee gingerbread oat cake. Candy canes jelly
+    beans caramels toffee dragée dessert tootsie roll. Muffin icing tart cotton candy.</p> <hr class="svelte-pvoym4"> <h2 id="registry" class="svelte-pvoym4">Registry</h2> <p class="svelte-1ilpytg" style="text-align: center;">We're registered at <strong>INSERT STORE</strong>.
+    <br> <br> <strong>Registry:</strong> #xxxxxxxxxxx
+    <br> <a href="/">View Registry</a></p> <hr class="svelte-pvoym4"> <h2 id="request-a-song" class="svelte-pvoym4">Request a Song</h2> <div data-ssgref="1"><div><form novalidate="" class="svelte-1r3bnez"><div class="inputs svelte-1r3bnez"><div class="wrapper svelte-szsw14"><label><div class="label svelte-szsw14">Title</div> <input class="input svelte-szsw14" title="Title" placeholder=""></label></div> <div class="wrapper svelte-szsw14"><label><div class="label svelte-szsw14">Artist</div> <input class="input svelte-szsw14" title="Artist" placeholder=""></label></div></div> <div class="buttons svelte-1r3bnez"><button type="submit" class="plain filled primary svelte-16jcgni">Submit</button></div></form></div></div> <hr class="svelte-pvoym4"> <h2 id="faq" class="svelte-pvoym4">Frequently Asked Questions</h2> <h3 class="svelte-7ba61m">Candy canes jelly beans caramels toffee dragée</h3> <p class="svelte-7ba61m">Jelly beans icing lollipop candy canes carrot cake. Chupa chups sugar plum bonbon cake oat cake apple pie oat
+    cake fruitcake. Donut marzipan oat cake icing tootsie roll chocolate cake. Dragée lollipop halvah icing jelly
+    fruitcake marzipan macaroon. Sugar plum ice cream biscuit sugar plum macaroon sugar plum sesame snaps jelly
+    beans. Bonbon sugar plum cupcake. Sesame snaps dessert lemon drops cake. Sweet roll candy canes chocolate bar
+    pastry halvah. Cookie brownie chocolate cake marzipan. Lollipop cupcake jelly-o jelly carrot cake pastry
+    lollipop. Chupa chups wafer bear claw marshmallow. Jelly-o halvah toffee gingerbread oat cake. Candy canes jelly
+    beans caramels toffee dragée dessert tootsie roll. Muffin icing tart cotton candy.</p> <h3 class="svelte-7ba61m">Candy canes jelly beans caramels toffee dragée</h3> <p class="svelte-7ba61m">Cake sugar plum jelly-o candy canes sweet roll jujubes powder candy. Lollipop liquorice pie. Cupcake liquorice
+    pastry gummi bears gummi bears marshmallow pudding. Pudding macaroon ice cream soufflé cupcake ice cream
+    liquorice. Tart candy canes gingerbread icing tootsie roll bear claw. Danish chocolate bar chocolate bar candy
+    canes dessert cotton candy. Jujubes jelly beans sugar plum bear claw. Sesame snaps cotton candy croissant
+    lollipop. Danish dessert biscuit toffee. Cake candy canes tootsie roll macaroon biscuit. Tart jelly-o marzipan
+    dessert gingerbread pastry caramels pie. Cheesecake danish chocolate bar. Muffin chocolate cake chupa chups
+    jujubes bear claw jelly-o.</p> <h3 class="svelte-7ba61m">Candy canes jelly beans caramels toffee dragée</h3> <p class="svelte-7ba61m">Wafer bonbon dragée. Fruitcake sugar plum cupcake liquorice danish cheesecake ice cream. Carrot cake chocolate
+    cake carrot cake. Croissant marshmallow tootsie roll cotton candy cotton candy biscuit powder. Marshmallow
+    brownie muffin carrot cake. Marshmallow candy donut wafer cheesecake cotton candy. Marzipan icing pudding
+    cheesecake cheesecake. Caramels jelly-o gummi bears tiramisu bonbon dessert cookie. Pudding marshmallow jelly
+    sweet. Cookie toffee icing halvah ice cream chupa chups chocolate bar. Topping jelly-o tiramisu. Jelly-o dragée
+    liquorice soufflé jelly.</p> <h3 class="svelte-7ba61m">Candy canes jelly beans caramels toffee dragée</h3> <p class="svelte-7ba61m">Tootsie roll cheesecake macaroon cotton candy. Bear claw gummies marshmallow chupa chups halvah sweet toffee.
+    Macaroon soufflé caramels cake pie lollipop oat cake icing tiramisu. Danish macaroon chocolate bar dessert.
+    Cheesecake gingerbread pie liquorice lemon drops marshmallow. Tootsie roll chocolate bar jelly. Soufflé
+    fruitcake pie lemon drops caramels icing jelly-o pie. Caramels sugar plum tart marzipan pie. Gingerbread
+    tiramisu brownie. Chocolate bar donut lollipop chupa chups muffin cake muffin. Gummi bears bear claw dessert
+    jelly-o sesame snaps pie apple pie. Sugar plum candy apple pie. Brownie bonbon chocolate. Chocolate bar biscuit
+    donut jujubes lollipop topping ice cream bonbon.</p> <h3 class="svelte-7ba61m">Candy canes jelly beans caramels toffee dragée</h3> <p class="svelte-7ba61m">Wafer muffin pudding. Powder jujubes biscuit oat cake lollipop. Jujubes ice cream sugar plum soufflé muffin
+    donut sweet roll. Marshmallow chocolate bar chocolate cake brownie. Pastry marzipan gingerbread chocolate lemon
+    drops jelly sweet roll sweet sugar plum. Candy canes biscuit biscuit chocolate bar bonbon apple pie. Ice cream
+    sesame snaps pastry topping caramels pudding lollipop candy canes. Ice cream brownie cookie gummi bears sugar
+    plum gummi bears donut cake dessert. Gummi bears jujubes chupa chups wafer apple pie. Pastry bear claw croissant
+    candy gummi bears gummi bears pudding. Brownie gummies gingerbread pie. Gummies pie chocolate bar.</p></main> <div class="svelte-1k12vup"><p class="svelte-1k12vup">Svelte Partial Hydrating Prerenderer</p></div></div>
+    
+
+
+
+<script type="module">
+        import c from '/dist/HomePage/RsvpForm/index.js';
+        
+            new c({
+                target: document.querySelector('[data-ssgref="0"]'),
+                hydrate: true,
+                props: {}
+            });
+        
+    </script><script type="module">
+        import c from '/dist/HomePage/SongRequestForm.js';
+        
+            new c({
+                target: document.querySelector('[data-ssgref="1"]'),
+                hydrate: true,
+                props: {}
+            });
+        
+    </script></body></html>
