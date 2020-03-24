@@ -22,7 +22,7 @@ Second, it's a headless chrome prerenderer that loads your svelte site, renders 
 
 
 
-## Marking a component
+## Marking a hydratable component
 
 Marking a component as hydratable is very simple.
 
@@ -65,19 +65,22 @@ This is what the v1 prototype looks like. I have an [alternative api][v2_idea] I
 
 
 
-## Demos
 
-The demo project has been deployed in three different ways.
+## Demo comparison
 
-[No hydration](https://jakedeichert.github.io/svelte-partial-hydrating-prerenderer/no-hydration/)
+The [demo project][demo] has been deployed in three different ways. If you load all the demos and view the Network tab to compare, you'll notice that partial hydration only loads the required js files for the two interactive components.
+
+> If the demo was a more complex, realistic site, we should notice a greater difference in amount of js saved due to partial hydration.
+
+**[No hydration](https://jakedeichert.github.io/svelte-partial-hydrating-prerenderer/no-hydration/)**
 
 This demo was compiled with svelvet to a `./public/dist` directory and then deployed as is, with no prerendring phase.
 
-[Partial hydration](https://jakedeichert.github.io/svelte-partial-hydrating-prerenderer/partial-hydration/)
+**[Partial hydration](https://jakedeichert.github.io/svelte-partial-hydrating-prerenderer/partial-hydration/)**
 
 This demo was compiled with svelvet and then prerendered with this [module][npm]. The root script tag was removed and only the interactive component script tags remain.
 
-[Full hydration](https://jakedeichert.github.io/svelte-partial-hydrating-prerenderer/full-hydration/)
+**[Full hydration](https://jakedeichert.github.io/svelte-partial-hydrating-prerenderer/full-hydration/)**
 
 This demo was compiled with svelvet and then prerendered but without partial hydration.
 
@@ -124,6 +127,7 @@ Once I find time in the next few weeks to test this out, I'll update this repo.
 
 
 
+[demo]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/tree/master/demo
 [npm]: https://www.npmjs.com/package/svelte-partial-hydrating-prerenderer
 [use_action]: https://svelte.dev/docs#use_action
 [v2_idea]: #alternative-marker-api
