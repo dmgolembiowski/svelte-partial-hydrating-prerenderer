@@ -26,7 +26,7 @@ Second, it's a headless chrome prerenderer that loads your svelte site, renders 
 
 Marking a component as hydratable is very simple.
 
-This is what the v1 prototype looks like. I have an alternative api I'm currently working on.
+This is what the v1 prototype looks like. I have an [alternative api][v2_idea] I'm currently working on.
 
 ~~~html
 <script>
@@ -96,7 +96,7 @@ Though, this should be easily solvable.
 
 ### The hydratable component's parent must ensure it's a single child
 
-This is an unfortunate trade-off of the current marker api. However, my v2 idea should solve this.
+This is an unfortunate trade-off of the current marker api. However, my [v2 idea][v2_idea] should solve this.
 
 ~~~html
 <main>
@@ -126,4 +126,6 @@ Once I find time in the next few weeks to test this out, I'll update this repo.
 
 [npm]: https://www.npmjs.com/package/svelte-partial-hydrating-prerenderer
 [use_action]: https://svelte.dev/docs#use_action
+[v2_idea]: #alternative-marker-api
+
 
