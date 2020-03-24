@@ -66,7 +66,7 @@ Marking a component as hydratable is very simple.
 
 ## How does it work?
 
-When the headless chrome [prerender phase][demo_prerender_script] runs, _marked_ hydratable components are found and their script tags are [appended to the DOM][demo_partial_script_tags] which is saved as a static html file. The [root script tag][demo_root_script] ends up getting removed as well.
+When the headless chrome [prerender phase][demo_prerender_script] runs, _marked_ hydratable components [are found][demo_config_pageinit] and their script tags are [appended to the DOM][demo_partial_script_tags] which is saved as a static html file. The [root script tag][demo_root_script] ends up [getting removed][demo_config_plugin] as well.
 
 This results in the client loading a complete html tree upfront, followed by the partial hydration of any interactive components. No unnecessary js is loaded!
 
@@ -152,6 +152,8 @@ Once I find time in the next few weeks to test this out, I'll update this repo.
 [demo_prerender_script]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/b5737a1f50124b66307189596e8550b214ad4f02/demo/package.json#L10
 [demo_partial_script_tags]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/2d76445a9640698c31f1ec770edb2e3612ac77de/partial-hydration/index.html#L88-L106
 [demo_root_script]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/b5737a1f50124b66307189596e8550b214ad4f02/demo/public/index.html#L51-L57
+[demo_config_plugin]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/97000cae79f9029e5abd943aa345cdb91d0ddbfb/demo/prerender.config.js#L4-L12
+[demo_config_pageinit]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/97000cae79f9029e5abd943aa345cdb91d0ddbfb/demo/prerender.config.js#L23-L25
 
 
 
