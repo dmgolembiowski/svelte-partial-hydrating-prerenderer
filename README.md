@@ -68,7 +68,9 @@ Marking a component as hydratable is very simple.
 
 When the headless chrome [prerender phase][demo_prerender_script] runs, _marked_ hydratable components are found and their script tags are [appended to the DOM][demo_partial_script_tags] which is saved as a static html file. The [root script tag][demo_root_script] ends up getting removed as well.
 
-This results in the client loading a complete html tree upfront, followed by the partial hydration of any interactive components.
+This results in the client loading a complete html tree upfront, followed by the partial hydration of any interactive components. No unnecessary js is loaded!
+
+This prototype only works if your components are **not** bundled together. It's made especially to work with ES Modules which is what [svelvet][svelvet] outputs. However, this concept is not dependent on svelvet and could work with any svelte bundler that outputs components to individual ES Modules.
 
 
 
@@ -142,7 +144,7 @@ Once I find time in the next few weeks to test this out, I'll update this repo.
 
 
 
-
+[svelvet]: https://github.com/jakedeichert/svelvet
 [demo]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/tree/master/demo
 [npm]: https://www.npmjs.com/package/svelte-partial-hydrating-prerenderer
 [use_action]: https://svelte.dev/docs#use_action
