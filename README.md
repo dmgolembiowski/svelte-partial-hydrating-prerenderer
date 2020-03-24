@@ -17,9 +17,9 @@ A **proof of concept** partial-hydrating prerenderer for svelte.
 
 I've published this [example module to npm][npm]. It has two jobs.
 
-First, it's a [`use:action`][use_action] helper that lets you _mark_ a svelte component as hydratable.
+First, it's a [`use:action`][use_action] helper that lets you [_mark_][module_api] a svelte component as hydratable.
 
-Second, it's a headless chrome prerenderer that loads your svelte site, renders your component tree and outputs each page to static html files.
+Second, it's a [headless chrome prerenderer][module_cli] that loads your svelte site, renders your component tree and outputs each page to static html files.
 
 
 
@@ -83,19 +83,19 @@ This prototype only works if your components are **not** bundled together. It's 
 
 The [demo project][demo] has been deployed in three different ways. If you load all the demos and view the Network tab to compare, you'll notice that partial hydration only loads the required js files for the two interactive components.
 
-> If the demo was a more complex, realistic site, we should notice a greater difference in amount of js saved due to partial hydration.
+> If the demo was a more complex, realistic site, we should notice a greater difference in the amount of js saved due to partial hydration.
 
 **[No hydration](https://jakedeichert.github.io/svelte-partial-hydrating-prerenderer/no-hydration/)**
 
-This demo was compiled with svelvet to a `./public/dist` directory and then deployed as is, with no prerendring phase.
+This demo was [compiled](https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/gh-pages/no-hydration/index.html) with svelvet and then deployed as is, with no prerendering phase.
 
 **[Partial hydration](https://jakedeichert.github.io/svelte-partial-hydrating-prerenderer/partial-hydration/)**
 
-This demo was compiled with svelvet and then prerendered with this [module][npm]. The root script tag was removed and only the interactive component script tags remain.
+This demo was [compiled](https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/gh-pages/partial-hydration/index.html) with svelvet and then prerendered with this [module][npm]. The root script tag was removed and only the interactive component script tags remain.
 
 **[Full hydration](https://jakedeichert.github.io/svelte-partial-hydrating-prerenderer/full-hydration/)**
 
-This demo was compiled with svelvet and then prerendered but without partial hydration.
+This demo was [compiled](https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/gh-pages/full-hydration/index.html) with svelvet and then prerendered but without partial hydration.
 
 
 
@@ -143,7 +143,8 @@ Once I find time in the next few weeks to test this out, I'll update this repo.
 
 
 
-
+[module_api]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/lib/index.js
+[module_cli]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/bin/index.js
 [svelvet]: https://github.com/jakedeichert/svelvet
 [demo]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/tree/master/demo
 [npm]: https://www.npmjs.com/package/svelte-partial-hydrating-prerenderer
