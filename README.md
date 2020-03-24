@@ -9,6 +9,9 @@ A **proof of concept** partial-hydrating prerenderer for svelte.
 ---
 
 
+## What's partial hydration?
+
+## Why doesn't everyone do partial hydration?
 
 ## What does this proof of concept do?
 
@@ -113,6 +116,11 @@ This is an unfortunate trade-off of the current marker api. However, my [v2 idea
     <p>Other things...</p>
 </main>
 ~~~
+
+
+
+
+
 
 ## Alternative marker api
 
