@@ -156,6 +156,5 @@ TODO...
 [demo_prerender_script]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/b5737a1f50124b66307189596e8550b214ad4f02/demo/package.json#L10
 [demo_partial_script_tags]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/2d76445a9640698c31f1ec770edb2e3612ac77de/partial-hydration/index.html#L88-L106
 [demo_root_script]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/b5737a1f50124b66307189596e8550b214ad4f02/demo/public/index.html#L51-L57
-[demo_config_plugin]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/97000cae79f9029e5abd943aa345cdb91d0ddbfb/demo/prerender.config.js#L4-L12
-[demo_config_pageinit]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/97000cae79f9029e5abd943aa345cdb91d0ddbfb/demo/prerender.config.js#L23-L25
+[demo_config_plugin]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/d21d1c0827711ace4fcdf2fb9038fe55f10a9a8d/demo/prerender.config.js#L1-L11
 
