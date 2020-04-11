@@ -160,6 +160,22 @@ I tried a few concepts that didn't work out...
 
 My goal here was to hack the svelte methods at runtime during the prerender phase (not in production) to look for the existence of a `hydrate=true` prop. If that prop was found on a component, I would [mark it][prerender_mark]. The problem here is that you can't monkey patch `svelte/internal` methods when loading it via ES Modules... because they are read-only!
 
+### <Hydrate/> wrapper component
+
+Instead of `use:hydrate` inside a component, I was hoping that the parent can make the decision instead whether a child component should be hydrated or not.
+
+It could look something like this below.
+
+```html
+<script>
+    import Hydrate from 'svelte-partial-hydrating-prerenderer';
+</script>
+<div>
+    <!-- The component path would be loaded as a dynamic import. -->
+    <!-- All other props would be passed to that component. -->
+    <Hydrate component="/components/SomeComponent.js" whateverProp="stuff">
+</div>
+```
 
 
 
@@ -178,6 +194,4 @@ My goal here was to hack the svelte methods at runtime during the prerender phas
 [demo_root_script]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/b5737a1f50124b66307189596e8550b214ad4f02/demo/public/index.html#L51-L57
 [demo_config_plugin]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/97000cae79f9029e5abd943aa345cdb91d0ddbfb/demo/prerender.config.js#L4-L12
 [demo_config_pageinit]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/97000cae79f9029e5abd943aa345cdb91d0ddbfb/demo/prerender.config.js#L23-L25
-
-
 
