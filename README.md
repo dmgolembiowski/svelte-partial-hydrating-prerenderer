@@ -40,7 +40,7 @@ In my case, I wanted the ability to develop _static_ sites completely with svelt
 
 I've published this [example module to npm][npm]. It has two jobs.
 
-First, it's a [`use:action`][use_action] helper that lets you [_mark_][module_api] a svelte component as hydratable.
+First, it's a [`<Hydrate/>`][hydrate_component] component that lets you [_mark_][module_api] a svelte component as hydratable.
 
 Second, it's a [headless chrome prerenderer][module_cli] that loads your svelte site, renders your component tree and outputs each page to static html files.
 
@@ -50,33 +50,30 @@ Second, it's a [headless chrome prerenderer][module_cli] that loads your svelte 
 
 ## Marking a hydratable component
 
-Marking a component as hydratable is pretty simple...
+Marking a component as hydratable is pretty simple.
 
 ~~~html
+<!-- src/HomePage/index.svelte -->
 <script>
-    // 1. Import the `hydrate` function
-    import { hydrate } from 'svelte-partial-hydrating-prerenderer';
-    import Button from '/components/ui/Button';
-
-    let submitted = false;
-
-    function handleSubmit() {
-        console.log(`clicked button`);
-        submitted = true;
-    }
+    // 1. Import the <Hydrate/> component.
+    import { Hydrate } from 'svelte-partial-hydrating-prerenderer';
 </script>
 
-<!-- 2. Use it and pass it the current props of this component -->
-<div use:hydrate={$$props}>
-    {#if !submitted}
-        <Button on:click={handleSubmit}>
-            Submit
-        </Button>
-    {:else}
-        <div>
-            Thanks for submitting!
-        </div>
-    {/if}
+<div>
+    <div>...</div>
+
+    <!-- 2. Pass an absolute file path to the component you want to make hydratable. -->
+    <Hydrate
+        _this="/dist/HomePage/SomeInteractiveForm.js"
+        _style="display: flex"
+        _class="someclass"
+        someProp="whatever"
+        anotherProp="whatever"/>
+    <!-- 💡 Any props you add will be passed through to that component. -->
+    <!-- 💡 _style is used to style the wrapping div. -->
+    <!-- 💡 _class is also available to style the wrapping div. -->
+
+    <div>...</div>
 </div>
 ~~~
 
@@ -87,7 +84,7 @@ Marking a component as hydratable is pretty simple...
 
 ## How does it work?
 
-When the headless chrome [prerender phase][demo_prerender_script] runs, _marked_ hydratable components [are found][demo_config_pageinit] and their script tags are [appended to the DOM][demo_partial_script_tags] which is saved as a static html file. The [root script tag][demo_root_script] ends up [getting removed][demo_config_plugin] as well.
+When the headless chrome [prerender phase][demo_prerender_script] runs, the `<Hydrate/>` generates a script tag for their component and [appends it to the DOM][demo_partial_script_tags] which is saved as a static html file. The [root script tag][demo_root_script] ends up [getting removed][demo_config_plugin] as well.
 
 This results in the client loading a complete html tree upfront, followed by the partial hydration of any interactive components. No unnecessary js is loaded!
 
@@ -101,6 +98,8 @@ This prototype only works if your components are **not** bundled together. It's 
 
 
 ## Demo comparison
+
+> TODO: i need to rebuild these demos
 
 The [demo project][demo] has been deployed in three different ways. If you load all the demos and view the Network tab to compare, you'll notice that partial hydration only loads the js files required for the two interactive components and their children.
 
@@ -129,27 +128,6 @@ This demo was compiled with svelvet and then [prerendered](https://github.com/ja
 
 This doesn't keep track of the graph of imports and which files are not needed after the prerender phase. This means you end up deploying all those excess js files, but at least the client doesn't have to load them.
 
-### The hydratable component's parent must ensure it's a single child
-
-This is due to how svelte hydrates a component tree. An alternative marker api could possibly work around this limitation.
-
-~~~html
-<main>
-    <p>Stuff...</p>
-
-    <div>
-        <!-- Must be the single child within a parent to make it partially-hydratable -->
-        <SomeComponentMarkedAsHydratable />
-    </div>
-
-    <p>Other things...</p>
-</main>
-~~~
-
-### You have to pass $$props to the action
-
-Instead of `use:hydrate={$$props}` I was hoping that the api could be as simple as `use:hydrate`. Unfortunately, you can't access the component's `$$props` from the [`node` param][use_action_hydrate] that svelte provides to actions.
-
 
 
 ## Other marker api attempts
@@ -160,27 +138,13 @@ I tried a few concepts that didn't work out...
 
 My goal here was to hack the svelte methods at runtime during the prerender phase (not in production) to look for the existence of a `hydrate=true` prop. If that prop was found on a component, I would [mark it][prerender_mark]. The problem here is that you can't monkey patch `svelte/internal` methods when loading it via ES Modules... because they are read-only!
 
-### &lt;Hydrate/&gt; wrapper component
+### use:hydrate component action
 
-Instead of `use:hydrate` inside a component, I was hoping that the parent can make the decision instead whether a child component should be hydrated or not.
-
-It could look something like this below.
-
-```html
-<script>
-    import Hydrate from 'svelte-partial-hydrating-prerenderer';
-</script>
-<div>
-    <!-- The component path would be loaded as a dynamic import. -->
-    <!-- All other props would be passed to that component. -->
-    <Hydrate component="/components/SomeComponent.js" whateverProp="stuff">
-</div>
-```
+TODO...
 
 
 
-
-
+[hydrate_component]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/fb23969a33c016003b805a4a684980c337a93fc0/lib/Hydrate.svelte
 [module_api]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/lib/index.js
 [module_cli]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/bin/index.js
 [svelvet]: https://github.com/jakedeichert/svelvet
