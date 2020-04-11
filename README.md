@@ -137,7 +137,7 @@ Though, this should be easily solvable.
 
 ### The hydratable component's parent must ensure it's a single child
 
-This is an unfortunate trade-off of the current marker api.
+This is due to how svelte hydrates a component tree. An alternative marker api could possibly work around this limitation.
 
 ~~~html
 <main>
