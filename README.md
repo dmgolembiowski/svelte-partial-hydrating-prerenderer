@@ -27,6 +27,17 @@ So if we know that our header, footer and body text is static, then we don't wan
 
 ## Why doesn't everyone do partial hydration?
 
+Mostly because it's hard right now. Existing bundlers combine js files into chunks based on the assumption that you want to load _all_ your js at runtime. Because of this, it can be challenging to configure the correct separation of code that efficient partial hydration requires.
+
+Here's an example scenario. If you have a `Button` component that's used in many places, it may get put into a common bundle that contains other components like `Input`, `Header` and `Footer`. Now let's say that you have an `EmailNewsletterSignupForm` at the bottom of every page which is just an `Input` and `Button` to submit. Ideally, you don't want to send down all the js for the static parts of your site... but because your `Button` is bundled with `Header` and `Footer`, you're going to be loading unnecessary code.
+
+The other reason is that prerendering and partial hydration _does not_ make sense for certain sites. For a static site or blog with a few interactive components, partial hydration is ideal. But for a fully dynamic and interactive app with limited static content, it won't usually end up being worth it. And if you really think you need _global-infecting features_ like client-side routing or theming, then partial hydration is just not a right fit for you.
+
+In my case, I wanted the ability to develop _static_ sites completely with svelte and not ship all the unnecessary js. I only have a few form components that benefit from interactivity. And I don't need client-side routing... I'm just using plain, old, simple links. That's why prerendering and partial hydration works for me.
+
+
+
+
 ## What does this proof of concept do?
 
 I've published this [example module to npm][npm]. It has two jobs.
