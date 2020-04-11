@@ -160,7 +160,7 @@ I tried a few concepts that didn't work out...
 
 My goal here was to hack the svelte methods at runtime during the prerender phase (not in production) to look for the existence of a `hydrate=true` prop. If that prop was found on a component, I would [mark it][prerender_mark]. The problem here is that you can't monkey patch `svelte/internal` methods when loading it via ES Modules... because they are read-only!
 
-### <Hydrate/> wrapper component
+### &lt;Hydrate/&gt; wrapper component
 
 Instead of `use:hydrate` inside a component, I was hoping that the parent can make the decision instead whether a child component should be hydrated or not.
 
