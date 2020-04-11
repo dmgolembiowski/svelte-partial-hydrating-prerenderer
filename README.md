@@ -31,7 +31,7 @@ Here's an example scenario. If you have a `Button` component that's used in many
 
 The other reason is that prerendering and partial hydration _does not_ make sense for certain sites. For a static site or blog with a few interactive components, partial hydration is ideal. But for a fully dynamic and interactive app with limited static content, it won't usually end up being worth it. And if you really think you need _global-infecting features_ like client-side routing or theming, then partial hydration is just not a right fit for you.
 
-In my case, I wanted the ability to develop _static_ sites completely with svelte and not ship all the unnecessary js. I only have a few form components that benefit from interactivity. And I don't need client-side routing... I'm just using plain, old, simple links. That's why prerendering and partial hydration works for me.
+In my case, I wanted the ability to develop _static_ sites completely with svelte and not ship all the unnecessary js. I only have a few form components that benefit from interactivity. And I don't need client-side routing... I'm just using plain, old, simple links. That's why prerendering and partial hydration works for me :)
 
 
 
@@ -129,8 +129,6 @@ This demo was compiled with svelvet and then [prerendered](https://github.com/ja
 
 This doesn't keep track of the graph of imports and which files are not needed after the prerender phase. This means you end up deploying all those excess js files, but at least the client doesn't have to load them.
 
-Though, this should be easily solvable.
-
 ### The hydratable component's parent must ensure it's a single child
 
 This is due to how svelte hydrates a component tree. An alternative marker api could possibly work around this limitation.
@@ -150,7 +148,19 @@ This is due to how svelte hydrates a component tree. An alternative marker api c
 
 ### You have to pass $$props to the action
 
-Instead of `use:hydrate={$$props}` I was hoping that the api could be as simple as `use:hydrate`. Unfortunately, you can't access the component's `$$props` from the [node param][use_action_hydrate] that svelte provides to actions.
+Instead of `use:hydrate={$$props}` I was hoping that the api could be as simple as `use:hydrate`. Unfortunately, you can't access the component's `$$props` from the [`node` param][use_action_hydrate] that svelte provides to actions.
+
+
+
+## Other marker api attempts
+
+I tried a few concepts that didn't work out...
+
+### Monkey patching svelte/internal methods
+
+My goal here was to hack the svelte methods at runtime during the prerender phase (not in production) to look for the existence of a `hydrate=true` prop. If that prop was found on a component, I would [mark it][prerender_mark]. The problem here is that you can't monkey patch `svelte/internal` methods when loading it via ES Modules... because they are read-only!
+
+
 
 
 
@@ -159,6 +169,7 @@ Instead of `use:hydrate={$$props}` I was hoping that the api could be as simple 
 [module_cli]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/bin/index.js
 [svelvet]: https://github.com/jakedeichert/svelvet
 [use_action_hydrate]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/8b35859fcd75452f5deebbc88cf46b62a75aed07/lib/index.js#L3
+[prerender_mark]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/plugins/mark-hydratable-component.js
 [demo]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/tree/master/demo
 [npm]: https://www.npmjs.com/package/svelte-partial-hydrating-prerenderer
 [use_action]: https://svelte.dev/docs#use_action
