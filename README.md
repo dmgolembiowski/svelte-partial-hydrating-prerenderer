@@ -136,7 +136,7 @@ I tried a few concepts that didn't work out...
 
 ### Monkey patching svelte/internal methods
 
-My goal here was to hack the svelte methods at runtime during the prerender phase (not in production) to look for the existence of a `hydrate=true` prop. If that prop was found on a component, I would [mark it][prerender_mark]. The problem here is that you can't monkey patch `svelte/internal` methods when loading it via ES Modules... because they are read-only!
+My goal here was to hack the svelte methods at runtime during the prerender phase (not in production) to look for the existence of a `hydrate=true` prop. If that prop was found on a component, I would mark it. The problem here is that you can't monkey patch `svelte/internal` methods when loading it via ES Modules... because they are read-only!
 
 ### use:hydrate component action
 
@@ -149,7 +149,6 @@ TODO...
 [module_cli]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/bin/index.js
 [svelvet]: https://github.com/jakedeichert/svelvet
 [use_action_hydrate]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/8b35859fcd75452f5deebbc88cf46b62a75aed07/lib/index.js#L3
-[prerender_mark]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/plugins/mark-hydratable-component.js
 [demo]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/tree/master/demo
 [npm]: https://www.npmjs.com/package/svelte-partial-hydrating-prerenderer
 [use_action]: https://svelte.dev/docs#use_action
