@@ -54,7 +54,7 @@ Second, it's a [headless chrome prerenderer][module_cli] that loads your svelte 
 
 Marking a component as hydratable is very simple.
 
-> This is what the v1 prototype looks like. I have an [alternative api][v2_idea] I'm currently working on.
+> This is what the v1 prototype looks like. I have an [alternative api][v2_idea] idea I might work on at some point.
 
 ~~~html
 <script>
@@ -112,15 +112,15 @@ The [demo project][demo] has been deployed in three different ways. If you load 
 
 **[No hydration](https://jakedeichert.github.io/svelte-partial-hydrating-prerenderer/no-hydration/)**
 
-This demo was [compiled](https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/gh-pages/no-hydration/index.html) with svelvet and then deployed as is, with no prerendering phase.
+This demo was compiled with svelvet and then deployed [as is](https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/gh-pages/no-hydration/index.html), with no prerendering phase.
 
 **[Partial hydration](https://jakedeichert.github.io/svelte-partial-hydrating-prerenderer/partial-hydration/)**
 
-This demo was [compiled](https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/gh-pages/partial-hydration/index.html) with svelvet and then prerendered with this [module][npm]. The root script tag was removed and only the interactive component script tags remain.
+This demo was compiled with svelvet and then [prerendered](https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/gh-pages/partial-hydration/index.html) with this [module][npm]. The root script tag was removed and only the interactive component script tags remain.
 
 **[Full hydration](https://jakedeichert.github.io/svelte-partial-hydrating-prerenderer/full-hydration/)**
 
-This demo was [compiled](https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/gh-pages/full-hydration/index.html) with svelvet and then prerendered but without partial hydration.
+This demo was compiled with svelvet and then [prerendered](https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/gh-pages/full-hydration/index.html) but without partial hydration.
 
 
 
@@ -151,17 +151,6 @@ This is an unfortunate trade-off of the current marker api. However, my [v2 idea
     <p>Other things...</p>
 </main>
 ~~~
-
-
-
-
-
-
-## Alternative marker api
-
-I have an alternative way to mark a component as hydratable and it solves the "single child of parent" problem described above.
-
-Once I find time in the next few weeks to test this out, I'll update this repo.
 
 
 
