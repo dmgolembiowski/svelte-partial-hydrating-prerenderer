@@ -84,7 +84,7 @@ Marking a component as hydratable is pretty simple.
 
 ## How does it work?
 
-When the headless chrome [prerender phase][demo_prerender_script] runs, the `<Hydrate/>` generates a script tag for their component and [appends it to the DOM][demo_partial_script_tags] which is saved as a static html file. The [root script tag][demo_root_script] ends up [getting removed][demo_config_plugin] as well.
+When the headless chrome [prerender phase][demo_prerender_script] runs, `<Hydrate/>` generates a script tag for their component and [appends it to the DOM][demo_partial_script_tags] which is saved as a static html file. The [root script tag][demo_root_script] ends up [getting removed][demo_config_plugin] as well.
 
 This results in the client loading a complete html tree upfront, followed by the partial hydration of any interactive components. No unnecessary js is loaded!
 
