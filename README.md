@@ -99,8 +99,6 @@ This prototype only works if your components are **not** bundled together. It's 
 
 ## Demo comparison
 
-> TODO: i need to rebuild these demos
-
 The [demo project][demo] has been deployed in three different ways. If you load all the demos and view the Network tab to compare, you'll notice that partial hydration only loads the js files required for the two interactive components and their children.
 
 > If the demo was a more complex, realistic site, we should notice a greater difference in the amount of js saved due to partial hydration.
