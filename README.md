@@ -40,7 +40,7 @@ In my case, I wanted the ability to develop _static_ sites completely with svelt
 
 I've published this [example module to npm][npm]. It has two jobs.
 
-First, it's a [`<Hydrate/>`][hydrate_component] component that lets you [_mark_][module_api] a svelte component as hydratable.
+First, it's a [`<Hydrate/>`][hydrate_component] component that lets you _mark_ a svelte component as hydratable.
 
 Second, it's a [headless chrome prerenderer][module_cli] that loads your svelte site, renders your component tree and outputs each page to static html files.
 
