@@ -11,6 +11,20 @@ A **proof of concept** partial-hydrating prerenderer for svelte.
 
 ## What's partial hydration?
 
+First, let's talk about normal hydration.
+
+When you prerender your site, either at build time or at runtime via server-side rendering (SSR), the client receives a completely rendered html tree upfront. Once your js bundles have finished downloading, your app root typically mounts to the tree (hydrates it) and handles rendering and interactivity from that point forwards.
+
+What's the problem with this?
+
+Well for many sites, a lot of the content may actually be static. Hydrating static content is unnecessary for the most part and you end up sending down excess js to render what's already showing. A good example of this is a site's header and footer which rarely include interactivity other than static links to pages. For a blog, likely most of the content is static. Maybe you just have a simple newsletter signup form with an email input and submit button at the bottom of every page which is interactive.
+
+The goal of partial hydration is to only hydrate certain parts of the site. Ideally, we only want to hydrate the interactive parts, as the static parts won't change after a rerender. This also means, we don't want to load unnecessary js files that the client doesn't need.
+
+So if we know that our header, footer and body text is static, then we don't want to send down the js for those since the prerender phase already rendered them to our html file. But for interactive parts, like maybe an email newsletter form, we want to hydrate that so it works.
+
+
+
 ## Why doesn't everyone do partial hydration?
 
 ## What does this proof of concept do?
