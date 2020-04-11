@@ -59,6 +59,10 @@
 <script>
     // The component's file url for import
     export let _this;
+    // Style attribute to apply to the wrapping div
+    export let _style = null;
+    // Class attribute to apply to the wrapping div
+    export let _class = null;
 
     let componentProps;
     let node;
@@ -77,7 +81,7 @@
         markHydratableComponent(_this, node, componentProps);
 </script>
 
-<div bind:this={node}>
+<div bind:this={node} class={_class} style={_style}>
     {#if importComponent}
         {#await importComponent then loadedComponent}
             <svelte:component

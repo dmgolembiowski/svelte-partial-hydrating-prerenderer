@@ -62,13 +62,13 @@ Marking a component as hydratable is pretty simple.
 <div>
     <div>...</div>
 
-    <!-- 2. Pass an absolute file path to the component you want to make hydratable. -->
+    <!-- 2. Render it with "_this" prop set to the component's import path. -->
     <Hydrate
         _this="/dist/HomePage/SomeInteractiveForm.js"
         _style="display: flex"
         _class="someclass"
         someProp="whatever"
-        anotherProp="whatever"/>
+        anotherProp="whatever" />
     <!-- 💡 Any props you add will be passed through to that component. -->
     <!-- 💡 _style is used to style the wrapping div. -->
     <!-- 💡 _class is also available to style the wrapping div. -->
