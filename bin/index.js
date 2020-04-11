@@ -37,7 +37,7 @@ const PORT = prerenderConfig.port || 8080;
     // Grab content of every page
     for (const p of prerenderConfig.pages) {
         const url = `http://localhost:${PORT}${p.path}`;
-        await page.goto(url);
+        await page.goto(url, { waitUntil: 'networkidle0' });
 
         // Run page plugins
         if (prerenderConfig.plugins) {
