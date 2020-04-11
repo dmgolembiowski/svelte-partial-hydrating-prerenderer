@@ -7,10 +7,7 @@
 
 <main>
     <h2 id="rsvp">RSVP</h2>
-    <div>
-        <!-- Must be the single child within a parent to make it partially-hydratable -->
-        <Hydrate _this="/dist/HomePage/RsvpForm/index.js" />
-    </div>
+    <Hydrate _this="/dist/HomePage/RsvpForm/index.js" />
     <hr />
 
     <h2 id="accommodations">Accommodations</h2>
@@ -22,10 +19,7 @@
     <hr />
 
     <h2 id="request-a-song">Request a Song</h2>
-    <div>
-        <!-- Must be the single child within a parent to make it partially-hydratable -->
-        <Hydrate _this="/dist/HomePage/SongRequestForm.js" />
-    </div>
+    <Hydrate _this="/dist/HomePage/SongRequestForm.js" />
     <hr />
 
     <h2 id="faq">Frequently Asked Questions</h2>
