@@ -2,9 +2,7 @@
 
 A **proof of concept** partial-hydrating prerenderer for svelte.
 
-
-**This doc is still in progress...**
-
+This project was an experiment and is not intended to be used by anyone. Hopefully the ideas presented here will help spawn more discussion around partial hydration and bundlers.
 
 ---
 
@@ -52,9 +50,7 @@ Second, it's a [headless chrome prerenderer][module_cli] that loads your svelte 
 
 ## Marking a hydratable component
 
-Marking a component as hydratable is very simple.
-
-> This is what the v1 prototype looks like. I have an alternative api idea I might work on at some point...
+Marking a component as hydratable is pretty simple...
 
 ~~~html
 <script>
@@ -152,7 +148,9 @@ This is due to how svelte hydrates a component tree. An alternative marker api c
 </main>
 ~~~
 
+### You have to pass $$props to the action
 
+Instead of `use:hydrate={$$props}` I was hoping that the api could be as simple as `use:hydrate`. Unfortunately, you can't access the component's `$$props` from the [node param][use_action_hydrate] that svelte provides to actions.
 
 
 
@@ -160,6 +158,7 @@ This is due to how svelte hydrates a component tree. An alternative marker api c
 [module_api]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/lib/index.js
 [module_cli]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/bin/index.js
 [svelvet]: https://github.com/jakedeichert/svelvet
+[use_action_hydrate]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/8b35859fcd75452f5deebbc88cf46b62a75aed07/lib/index.js#L3
 [demo]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/tree/master/demo
 [npm]: https://www.npmjs.com/package/svelte-partial-hydrating-prerenderer
 [use_action]: https://svelte.dev/docs#use_action
