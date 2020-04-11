@@ -1,17 +1,13 @@
 <script>
-    import RsvpForm from './RsvpForm/index';
     import Accommodations from './Accommodations';
     import Registry from './Registry';
-    import SongRequestForm from './SongRequestForm';
     import Faq from './Faq';
+    import { Hydrate } from 'svelte-partial-hydrating-prerenderer';
 </script>
 
 <main>
     <h2 id="rsvp">RSVP</h2>
-    <div>
-        <!-- Must be the single child within a parent to make it partially-hydratable -->
-        <RsvpForm />
-    </div>
+    <Hydrate _this="/dist/HomePage/RsvpForm/index.js" />
     <hr />
 
     <h2 id="accommodations">Accommodations</h2>
@@ -23,16 +19,12 @@
     <hr />
 
     <h2 id="request-a-song">Request a Song</h2>
-    <div>
-        <!-- Must be the single child within a parent to make it partially-hydratable -->
-        <SongRequestForm />
-    </div>
+    <Hydrate _this="/dist/HomePage/SongRequestForm.js" />
     <hr />
 
     <h2 id="faq">Frequently Asked Questions</h2>
     <Faq />
 </main>
-
 
 <style>
     main {

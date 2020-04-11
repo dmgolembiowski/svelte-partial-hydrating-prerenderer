@@ -1,5 +1,4 @@
 <script>
-    import { hydrate } from 'svelte-partial-hydrating-prerenderer';
     import Button from '/components/ui/Button';
     import Input from '/components/ui/Input';
 
@@ -12,9 +11,7 @@
     }
 </script>
 
-
-
-<div use:hydrate={$$props}>
+<div>
     {#if !submitted}
         <form on:submit|preventDefault={handleSubmit} novalidate>
             <div class="inputs">

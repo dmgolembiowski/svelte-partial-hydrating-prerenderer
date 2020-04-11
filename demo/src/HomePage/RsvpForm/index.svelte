@@ -1,5 +1,4 @@
 <script>
-    import { hydrate } from 'svelte-partial-hydrating-prerenderer';
     import Button from '/components/ui/Button';
     import Guest from './Guest';
 
@@ -28,9 +27,7 @@
     }
 </script>
 
-
-
-<div use:hydrate={$$props}>
+<div>
     {#if !submitted}
         <form on:submit|preventDefault={handleSubmit} novalidate>
             {#each guests as g, i}
