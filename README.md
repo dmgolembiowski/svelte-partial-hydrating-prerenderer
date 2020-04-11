@@ -132,26 +132,50 @@ This doesn't keep track of the graph of imports and which files are not needed a
 
 ## Other marker api attempts
 
-I tried a few concepts that didn't work out...
-
 ### Monkey patching svelte/internal methods
 
 My goal here was to hack the svelte methods at runtime during the prerender phase (not in production) to look for the existence of a `hydrate=true` prop. If that prop was found on a component, I would mark it. The problem here is that you can't monkey patch `svelte/internal` methods when loading it via ES Modules... because they are read-only!
 
 ### use:hydrate component action
 
-TODO...
+This was the original [v1 idea][v1_idea]. Instead of a parent compoment marking a child as hydratable, the child was in charge of marking itself. However, this had a few too many problems which is what led to the current v2 idea.
+
+~~~html
+<script>
+    // 1. Import the `hydrate` function
+    import { hydrate } from 'svelte-partial-hydrating-prerenderer';
+    import Button from '/components/ui/Button';
+
+    let submitted = false;
+
+    function handleSubmit() {
+        console.log(`clicked button`);
+        submitted = true;
+    }
+</script>
+
+<!-- 2. Use it and pass it the current props of this component -->
+<div use:hydrate={$$props}>
+    {#if !submitted}
+        <Button on:click={handleSubmit}>
+            Submit
+        </Button>
+    {:else}
+        <div>
+            Thanks for submitting!
+        </div>
+    {/if}
+</div>
+~~~
 
 
 
+[v1_idea]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/tree/v0.1.0#how-does-it-work
 [hydrate_component]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/fb23969a33c016003b805a4a684980c337a93fc0/lib/Hydrate.svelte
-[module_api]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/lib/index.js
 [module_cli]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/master/bin/index.js
 [svelvet]: https://github.com/jakedeichert/svelvet
-[use_action_hydrate]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/8b35859fcd75452f5deebbc88cf46b62a75aed07/lib/index.js#L3
 [demo]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/tree/master/demo
 [npm]: https://www.npmjs.com/package/svelte-partial-hydrating-prerenderer
-[use_action]: https://svelte.dev/docs#use_action
 [demo_prerender_script]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/b5737a1f50124b66307189596e8550b214ad4f02/demo/package.json#L10
 [demo_partial_script_tags]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/2d76445a9640698c31f1ec770edb2e3612ac77de/partial-hydration/index.html#L88-L106
 [demo_root_script]: https://github.com/jakedeichert/svelte-partial-hydrating-prerenderer/blob/b5737a1f50124b66307189596e8550b214ad4f02/demo/public/index.html#L51-L57
